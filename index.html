@@ -558,30 +558,30 @@
                 - The image should be at least 1200x800px for best quality
                 -->
                 <img
-                src="assets/images/friend-photo.jpg"
+                src="ник.png"
                 alt="Birthday Star"
                 loading="eager"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
                 >
                 <div class="photo-placeholder" style="display:none;">
-                    ⭐<br>Add friend-photo.jpg<br>to assets/images/
+                    ⭐<br><br>
                 </div>
             </div>
 
             <!-- GREETING -->
             <div class="greeting">
                 <!-- ★ REPLACE: Add your friend's name and age below -->
-                <h1>Happy Birthday<br>[Friend's Name]!</h1>
-                <span class="age-badge">🎂 Age [XX]</span>
+                <h1>С днюшкой<br>Никита!</h1>
+                <span class="age-badge">🎂 29 лет</span>
             </div>
 
             <!-- PERSONAL MESSAGE -->
             <div class="message-section">
                 <!-- ★ REPLACE: Write your personal birthday message here -->
                 <p>
-                    [Your personal birthday message goes here.<br>
-                    Write something heartfelt, funny, or both.<br>
-                    This is your dedicated space to make them smile.]
+                    Вдохновений и сил для борьбы!<br>
+                    Разъёбывай каждый год в пути!<br>
+                    HARD BOY!
                 </p>
             </div>
 
@@ -594,7 +594,7 @@
                         Recommended: square PNG with transparent background, ~300x300px
                         -->
                         <img
-                        src="assets/images/rick-sanchez.png"
+                        src="рик.jpg"
                         alt="Rick Sanchez"
                         loading="lazy"
                         onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
@@ -603,7 +603,7 @@
                     </div>
                     <span class="rick-label">Tap Rick 👆</span>
                 </button>
-                <div class="rick-popup" id="rickPopup" aria-live="polite">fuck</div>
+                <div class="rick-popup" id="rickPopup" aria-live="polite">Uh-oh..</div>
             </div>
 
             <!-- MUSIC PLAYER -->
@@ -613,9 +613,9 @@
                 </button>
                 <div class="song-buttons" id="songButtons">
                     <!-- ★ You can rename these buttons to match your song titles -->
-                    <button data-song="0" class="active-song">🎵 Song 1</button>
-                    <button data-song="1">🎵 Song 2</button>
-                    <button data-song="2">🎵 Song 3</button>
+                    <button data-song="0" class="active-song">🎵 Трек 1</button>
+                    <button data-song="1">🎵 Трек 2</button>
+                    <button data-song="2">🎵 Трек 3</button>
                 </div>
                 <div class="now-playing-label" id="nowPlayingLabel">
                     Ready — choose a song &amp; press play
@@ -625,7 +625,7 @@
             <!-- FOOTER -->
             <div class="card-footer">
                 <!-- ★ REPLACE: Add your name or keep as Justin -->
-                From Justin <span class="heart">❤️</span>
+                ОТ ПАРАДОКСА <span class="heart">❤️</span>
             </div>
 
         </article>
@@ -948,11 +948,11 @@
         }
 
         function updateNowPlayingLabel(index, playing) {
-            const songNames = ['Song 1', 'Song 2', 'Song 3']; // ★ Customize song names here
+            const songNames = ['Трек 1', 'Трек 2', 'Трек 3']; // ★ Customize song names here
             if (playing) {
-                nowPlayingLabel.textContent = `♫ Now playing: ${songNames[index]}`;
+                nowPlayingLabel.textContent = `♫ Играет: ${songNames[index]}`;
             } else {
-                nowPlayingLabel.textContent = `Ready — choose a song & press play`;
+                nowPlayingLabel.textContent = `Просто выбери песню`;
             }
         }
 
