@@ -870,47 +870,64 @@
         animateParticles();
 
         // ──────────────────────────────────────
-        // 2. RICK SANCHEZ POPUP
+        // 2. RICK SANCHEZ POPUP - 9 + 1 Pattern
         // ──────────────────────────────────────
+
         const rickTrigger = document.getElementById('rickTrigger');
-        const rickPopup = document.getElementById('rickPopup');
-        let popupTimeout = null;
-        let popupRemoveTimeout = null;
+        const rickPopup     = document.getElementById('rickPopup');
+
+        let tapCount = 0;
+
+        // ★★★★★ CHANGE YOUR PHRASES HERE ★★★★★
+        const phrase1 = "Uh-oh..";                    // Shows 9 times
+        const phrase2 = "Lick, Lick, Lick my bells!";       // Shows every 10th tap
+
 
         function showRickPopup() {
+            tapCount++;
+
+            // Decide which phrase to show
+            if (tapCount % 10 === 0) {
+                rickPopup.textContent = phrase2;      // 10th, 20th, 30th... tap
+            } else {
+                rickPopup.textContent = phrase1;      // normal taps
+            }
+
             // Clear any existing timeouts
             if (popupTimeout) clearTimeout(popupTimeout);
             if (popupRemoveTimeout) clearTimeout(popupRemoveTimeout);
 
-            // Reset and trigger
+            // Reset animation
             rickPopup.classList.remove('active', 'pop');
-            void rickPopup.offsetWidth; // force reflow
+            void rickPopup.offsetWidth;               // force reflow
+
+            // Show popup
             rickPopup.classList.add('active', 'pop');
 
-            // Remove after delay
+            // Auto-hide after 1.6 seconds
             popupRemoveTimeout = setTimeout(() => {
                 rickPopup.classList.remove('active', 'pop');
-            }, 1500);
+            }, 1600);
         }
 
+        // Click, Touch and Keyboard support
         rickTrigger.addEventListener('click', (e) => {
             e.preventDefault();
             showRickPopup();
         });
 
-        // Touch support
         rickTrigger.addEventListener('touchend', (e) => {
             e.preventDefault();
             showRickPopup();
         });
 
-        // Keyboard support
         rickTrigger.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 showRickPopup();
             }
         });
+
 
         // ──────────────────────────────────────
         // 3. MUSIC PLAYER
