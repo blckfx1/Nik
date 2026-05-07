@@ -1,0 +1,151 @@
+TECHNICAL DOCUMENT – BIRTHDAY GITHUB PAGES PROJECT
+Document Version: 1.0
+Project Name: Captain-Black-Birthday
+Date: May 2026
+Prepared for: Justin (Singapore)
+Purpose: Digital Birthday Card for your friend (Captain Black style)
+
+1. PROJECT OVERVIEW
+This is a single-page static website built for GitHub Pages.
+It functions as an interactive digital birthday card with a strong Dark + Yellow aesthetic.
+The overall vibe is Playful yet Serious – cool, stylish, slightly edgy, matching your friend’s personality (Simpsons, music, black clothes, long coat, Captain Black, dark cigarettes).
+Core Theme Colors
+
+Primary Yellow: #FEBE10
+Secondary Yellow: #F0E68C
+Background / Dark Base: Deep black / very dark gray
+Text: Light yellow and white for contrast
+
+
+2. KEY REQUIREMENTS
+Visual Design
+
+Dark dominant background with bright yellow accents
+Elegant but fun layout
+Animated floating stars across the screen
+Floating fireworks-style particles mixed with emojis (🥴 and 😸)
+Large hero area for friend’s photo (you will insert it)
+Modern card-style container with glowing yellow border
+Fully responsive design (excellent on mobile phones and desktop PCs)
+
+Content Structure
+
+Big greeting header with friend’s name and age
+Large dedicated area for your personal birthday message (you will write it)
+Dedicated interactive section featuring Rick Sanchez
+Music player section
+Footer with sender name (From Justin ❤️)
+
+Interactive Features
+
+Clickable / Tap-able Rick Sanchez character
+When clicked or tapped → displays the word “fuck” in a fun popup
+
+Floating animated stars and emojis that continuously move across the screen
+Custom music player supporting 3 songs with easy switching
+
+Music Integration
+
+Support for exactly 3 custom audio files (you will provide .mp3 files)
+Built-in music player with:
+Play / Pause controls
+Song switcher (3 buttons)
+No auto-play on page load (user must click to start)
+
+Music continues playing while user interacts with the card
+
+Technical Constraints & Standards
+
+Pure static website (HTML + CSS + JavaScript only)
+No backend or server required
+Hosted on GitHub Pages
+Fast loading even on mobile data
+Compatible with all modern browsers (Chrome, Safari, Firefox, Edge)
+Mobile-first responsive design that also looks great on large PC screens
+
+
+3. PROJECT FOLDER STRUCTURE
+textcaptain-black-birthday/
+├── index.html                 ← Main file
+├── style.css                  ← All styling and animations
+├── script.js                  ← All interactivity and effects
+├── assets/
+│   ├── images/
+│   │   ├── friend-photo.jpg          ← You add this
+│   │   └── rick-sanchez.png          ← Rick character image
+│   └── music/
+│       ├── song1.mp3
+│       ├── song2.mp3
+│       └── song3.mp3                 ← Your 3 songs
+├── README.md                  ← Instructions
+└── .nojekyll                  ← Required for GitHub Pages
+
+4. FUNCTIONAL SPECIFICATIONS
+Page Load Behavior
+
+Dark screen with floating stars and occasional emojis
+Central birthday card appears
+Music player ready but not playing automatically
+
+User Interactions
+
+Tapping/clicking Rick Sanchez triggers “fuck” text animation
+Clicking any of the 3 song buttons loads and plays the selected song
+All elements are touch-friendly for mobile use
+
+Performance Goals
+
+Page should load under 3 seconds
+Smooth 60fps animations for floating elements
+Low memory usage
+No external heavy libraries
+
+Accessibility & UX
+
+High contrast for readability
+Large touch targets
+Clear visual hierarchy
+Works without JavaScript (basic view still functional)
+
+
+5. DELIVERABLES
+You will receive:
+
+Complete technical document (this file)
+Full set of code files (index.html, style.css, script.js)
+Detailed step-by-step deployment guide for GitHub Pages
+Recommendations for image and music file optimization
+
+
+6. WHAT YOU NEED TO PROVIDE
+
+Friend’s full name and age
+Your complete birthday message text
+High-quality photo of your friend (recommended size: 1200x800px or larger)
+Three music files (.mp3 format) – any length is fine
+Any specific changes or additional wishes after reviewing the first version
+
+
+7. DEPLOYMENT METHOD
+
+Create a new public repository on GitHub
+Upload all files maintaining the exact folder structure
+Enable GitHub Pages in repository Settings
+Share the live link with your friend
+
+
+8. FUTURE POSSIBLE ENHANCEMENTS (Optional)
+
+Random funny messages from Rick Sanchez
+Confetti explosion on first load
+Progress bar and song title display in music player
+Share button (WhatsApp / Instagram / Telegram)
+Password protection for the page
+Download card as image button
+More advanced particle effects
+
+
+Approval Section
+Once you confirm this document matches your vision, reply with:
+“APPROVED – Proceed with full code”
+I will then deliver the complete ready-to-upload code package.

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday – Captain Black Style</title>
+
+    <!-- ============ style.css (inline) ============ -->
+    <style>
+        :root {
+            --yellow-primary: #FEBE10;
+            --yellow-secondary: #F0E68C;
+            --bg-deep: #0a0a0a;
+            --bg-card: #141414;
+            --text-light: #f5f3e0;
+            --text-muted: #c4b878;
+            --glow: rgba(254, 190, 16, 0.5);
+            --glow-strong: rgba(254, 190, 16, 0.85);
+            --font-heading: 'Georgia', 'Times New Roman', serif;
+            --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============ CANVAS BACKGROUND ============ */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============ MAIN WRAPPER ============ */
+        .main-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ============ BIRTHDAY CARD ============ */
+        .birthday-card {
+            background: var(--bg-card);
+            border: 2px solid var(--yellow-primary);
+            border-radius: 20px;
+            padding: 28px 24px 24px;
+            width: 100%;
+            box-shadow:
+                0 0 20px var(--glow),
+                0 0 50px rgba(254, 190, 16, 0.2),
+                0 0 80px rgba(254, 190, 16, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            animation: cardGlowPulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: visible;
+        }
+
+        @keyframes cardGlowPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 20px var(--glow), 0 0 50px rgba(254, 190, 16, 0.2), 0 0 80px rgba(254, 190, 16, 0.08);
+            }
+            50% {
+                box-shadow: 0 0 32px var(--glow-strong), 0 0 70px rgba(254, 190, 16, 0.35), 0 0 110px rgba(254, 190, 16, 0.14);
+            }
+        }
+
+        /* Subtle inner shimmer */
+        .birthday-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 22px;
+            background: transparent;
+            border: 2px solid transparent;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ============ HERO PHOTO AREA ============ */
+        .hero-photo-container {
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto 22px;
+            aspect-ratio: 3 / 2;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--yellow-primary);
+            box-shadow: 0 0 18px var(--glow);
+            background: #1a1a1a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-photo-container:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-photo-container .photo-placeholder {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============ GREETING ============ */
+        .greeting {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .greeting h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            color: var(--yellow-primary);
+            letter-spacing: 1px;
+            text-shadow: 0 0 16px var(--glow);
+            margin-bottom: 2px;
+        }
+
+        .greeting .age-badge {
+            display: inline-block;
+            background: var(--yellow-primary);
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 3px 14px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ============ MESSAGE SECTION ============ */
+        .message-section {
+            text-align: center;
+            margin: 18px 0 20px;
+            padding: 14px 10px;
+            border-top: 1px dashed rgba(254, 190, 16, 0.3);
+            border-bottom: 1px dashed rgba(254, 190, 16, 0.3);
+        }
+
+        .message-section p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        /* ============ RICK SANCHEZ SECTION ============ */
+        .rick-section {
+            text-align: center;
+            margin: 16px 0 20px;
+            position: relative;
+            user-select: none;
+        }
+
+        .rick-trigger {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            border: none;
+            background: none;
+            padding: 8px;
+            border-radius: 50%;
+            touch-action: manipulation;
+        }
+
+        .rick-trigger:active {
+            transform: scale(0.9);
+        }
+
+        .rick-trigger:focus-visible {
+            outline: 3px solid var(--yellow-primary);
+            outline-offset: 4px;
+            border-radius: 50%;
+        }
+
+        .rick-image-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--yellow-primary);
+            box-shadow: 0 0 22px var(--glow);
+            transition: box-shadow 0.3s ease;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .rick-trigger:hover .rick-image-wrapper,
+        .rick-trigger:focus-visible .rick-image-wrapper {
+            box-shadow: 0 0 35px var(--glow-strong), 0 0 60px rgba(254, 190, 16, 0.4);
+        }
+
+        .rick-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .rick-image-wrapper .rick-placeholder {
+            font-size: 2.6rem;
+            line-height: 1;
+        }
+
+        .rick-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* Rick popup bubble */
+        .rick-popup {
+            position: absolute;
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px) scale(0);
+            background: var(--yellow-primary);
+            color: #0a0a0a;
+            font-weight: 900;
+            font-size: 1.4rem;
+            padding: 8px 20px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .rick-popup::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--yellow-primary);
+        }
+
+        .rick-popup.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .rick-popup.pop {
+            animation: popBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popBounce {
+            0% {
+                transform: translateX(-50%) translateY(10px) scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: translateX(-50%) translateY(-8px) scale(1.15);
+                opacity: 1;
+            }
+            70% {
+                transform: translateX(-50%) translateY(3px) scale(0.92);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============ MUSIC PLAYER ============ */
+        .music-player {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(254, 190, 16, 0.35);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin: 8px 0 6px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .music-player .play-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--yellow-primary);
+            background: transparent;
+            color: var(--yellow-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .music-player .play-btn:hover,
+        .music-player .play-btn:focus-visible {
+            background: var(--yellow-primary);
+            color: #0a0a0a;
+            box-shadow: 0 0 20px var(--glow);
+        }
+        .music-player .play-btn:focus-visible {
+            outline: 3px solid var(--yellow-primary);
+            outline-offset: 3px;
+        }
+
+        .music-player .play-btn.playing {
+            background: var(--yellow-primary);
+            color: #0a0a0a;
+            box-shadow: 0 0 18px var(--glow);
+        }
+
+        .song-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .song-buttons button {
+            padding: 10px 18px;
+            border-radius: 22px;
+            border: 1.5px solid rgba(254, 190, 16, 0.5);
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 0.85rem;
+            letter-spacing: 0.6px;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 70px;
+            min-height: 42px;
+        }
+
+        .song-buttons button:hover,
+        .song-buttons button:focus-visible {
+            border-color: var(--yellow-primary);
+            background: rgba(254, 190, 16, 0.1);
+            color: var(--yellow-primary);
+            box-shadow: 0 0 12px var(--glow);
+        }
+        .song-buttons button:focus-visible {
+            outline: 2px solid var(--yellow-primary);
+            outline-offset: 3px;
+        }
+
+        .song-buttons button.active-song {
+            background: var(--yellow-primary);
+            color: #0a0a0a;
+            border-color: var(--yellow-primary);
+            font-weight: 700;
+            box-shadow: 0 0 16px var(--glow);
+        }
+
+        .now-playing-label {
+            width: 100%;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            min-height: 18px;
+            margin-top: 2px;
+        }
+
+        /* ============ FOOTER ============ */
+        .card-footer {
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(254, 190, 16, 0.2);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .card-footer .heart {
+            color: #ff4d6a;
+            display: inline-block;
+            animation: heartBeat 1.2s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.25);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.2);
+            }
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        /* ============ NOSCRIPT FALLBACK ============ */
+        noscript .no-js-warning {
+            display: block;
+            text-align: center;
+            color: var(--yellow-primary);
+            font-size: 0.85rem;
+            padding: 10px;
+            border: 1px dashed var(--yellow-primary);
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 480px) {
+            .birthday-card {
+                padding: 20px 14px 18px;
+                border-radius: 16px;
+            }
+            .rick-image-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            .rick-popup {
+                font-size: 1.2rem;
+                padding: 6px 16px;
+                top: -46px;
+            }
+            .music-player {
+                padding: 12px 10px;
+                gap: 8px;
+            }
+            .music-player .play-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .song-buttons button {
+                padding: 8px 14px;
+                font-size: 0.78rem;
+                min-width: 56px;
+                min-height: 36px;
+            }
+            .hero-photo-container {
+                max-width: 100%;
+                border-radius: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .birthday-card {
+                padding: 36px 32px 30px;
+                border-radius: 24px;
+            }
+            .rick-image-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            .rick-popup {
+                font-size: 1.6rem;
+                padding: 10px 26px;
+                top: -62px;
+            }
+            .greeting h1 {
+                font-size: 2.8rem;
+            }
+            .message-section p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ PARTICLE CANVAS ============ -->
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="main-wrapper">
+
+        <!-- BIRTHDAY CARD -->
+        <article class="birthday-card" role="main" aria-label="Birthday Card">
+
+            <!-- HERO PHOTO -->
+            <div class="hero-photo-container">
+                <!--
+                ★ Replace the placeholder below with your friend's photo:
+                - Add your photo file to: assets/images/friend-photo.jpg
+                - The image should be at least 1200x800px for best quality
+                -->
+                <img
+                src="assets/images/friend-photo.jpg"
+                alt="Birthday Star"
+                loading="eager"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                >
+                <div class="photo-placeholder" style="display:none;">
+                    ⭐<br>Add friend-photo.jpg<br>to assets/images/
+                </div>
+            </div>
+
+            <!-- GREETING -->
+            <div class="greeting">
+                <!-- ★ REPLACE: Add your friend's name and age below -->
+                <h1>Happy Birthday<br>[Friend's Name]!</h1>
+                <span class="age-badge">🎂 Age [XX]</span>
+            </div>
+
+            <!-- PERSONAL MESSAGE -->
+            <div class="message-section">
+                <!-- ★ REPLACE: Write your personal birthday message here -->
+                <p>
+                    [Your personal birthday message goes here.<br>
+                    Write something heartfelt, funny, or both.<br>
+                    This is your dedicated space to make them smile.]
+                </p>
+            </div>
+
+            <!-- RICK SANCHEZ INTERACTIVE -->
+            <div class="rick-section" id="rickSection">
+                <button class="rick-trigger" id="rickTrigger" aria-label="Click Rick Sanchez for a surprise">
+                    <div class="rick-image-wrapper">
+                        <!--
+                        ★ Add your Rick Sanchez image to: assets/images/rick-sanchez.png
+                        Recommended: square PNG with transparent background, ~300x300px
+                        -->
+                        <img
+                        src="assets/images/rick-sanchez.png"
+                        alt="Rick Sanchez"
+                        loading="lazy"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                        >
+                        <span class="rick-placeholder" style="display:none;">🧪</span>
+                    </div>
+                    <span class="rick-label">Tap Rick 👆</span>
+                </button>
+                <div class="rick-popup" id="rickPopup" aria-live="polite">fuck</div>
+            </div>
+
+            <!-- MUSIC PLAYER -->
+            <div class="music-player" id="musicPlayer" role="region" aria-label="Music Player">
+                <button class="play-btn" id="playPauseBtn" aria-label="Play or Pause music" title="Play / Pause">
+                    ▶
+                </button>
+                <div class="song-buttons" id="songButtons">
+                    <!-- ★ You can rename these buttons to match your song titles -->
+                    <button data-song="0" class="active-song">🎵 Song 1</button>
+                    <button data-song="1">🎵 Song 2</button>
+                    <button data-song="2">🎵 Song 3</button>
+                </div>
+                <div class="now-playing-label" id="nowPlayingLabel">
+                    Ready — choose a song &amp; press play
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="card-footer">
+                <!-- ★ REPLACE: Add your name or keep as Justin -->
+                From Justin <span class="heart">❤️</span>
+            </div>
+
+        </article>
+
+        <!-- NOSCRIPT NOTICE -->
+        <noscript>
+            <div class="no-js-warning" style="
+            display:block;
+            text-align:center;
+            color:#FEBE10;
+            font-size:0.85rem;
+            padding:12px;
+            border:1px dashed #FEBE10;
+            border-radius:8px;
+            margin-top:14px;
+            background:rgba(20,20,20,0.9);
+            max-width:600px;
+            width:100%;
+            ">
+            ⚠️ JavaScript is disabled. Animations &amp; the custom music player won't work, but you can still see the card!
+        </div>
+    </noscript>
+
+    <!-- Hidden native audio elements (fallback & JS audio source) -->
+    <!-- ★ Add your 3 MP3 files to: assets/music/song1.mp3, song2.mp3, song3.mp3 -->
+    <audio id="audio0" preload="none" src="Justice_-_DVNO.mp3"></audio>
+    <audio id="audio1" preload="none" src="Skriptonit_-_ZHit_kak_ya_zhivu.mp3"></audio>
+    <audio id="audio2" preload="none" src="Skriptonit_-_YAk_2.mp3"></audio>
+
+</div>
+
+<!-- ============ script.js (inline) ============ -->
+<script>
+    (function() {
+        // ──────────────────────────────────────
+        // 1. PARTICLE SYSTEM (Stars + Emojis)
+        // ──────────────────────────────────────
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const EMOJI_LIST = ['🥴', '😸'];
+        const STAR_COUNT = 90;
+        const EMOJI_MAX = 6; // max concurrent emoji particles
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            // Re-seed star positions if needed
+            if (particles.length < STAR_COUNT) seedParticles();
+        });
+
+        function seedParticles() {
+            particles = [];
+            // Create stars
+            for (let i = 0; i < STAR_COUNT; i++) {
+                particles.push(createStar());
+            }
+            // Add a couple initial emojis
+            for (let i = 0; i < 3; i++) {
+                particles.push(createEmoji());
+            }
+        }
+
+        function createStar() {
+            return {
+                type: 'star',
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2.2 + 0.8,
+                baseRadius: 0,
+                speedX: (Math.random() - 0.5) * 0.35,
+                speedY: (Math.random() - 0.5) * 0.35 - 0.1,
+                opacity: Math.random() * 0.7 + 0.3,
+                twinkleSpeed: Math.random() * 0.03 + 0.008,
+                twinkleOffset: Math.random() * Math.PI * 2,
+                color: Math.random() < 0.7 ?
+                `hsl(48, ${80 + Math.random()*20}%, ${70 + Math.random()*25}%)` :
+                '#ffffff',
+            };
+        }
+
+        function createEmoji(startX, startY) {
+            const emoji = EMOJI_LIST[Math.floor(Math.random() * EMOJI_LIST.length)];
+            return {
+                type: 'emoji',
+                emoji: emoji,
+                x: startX !== undefined ? startX : Math.random() * width,
+                y: startY !== undefined ? startY : height + 30,
+                size: Math.random() * 14 + 18,
+                speedX: (Math.random() - 0.5) * 0.7,
+                speedY: -(Math.random() * 1.2 + 0.5),
+                opacity: 0.85,
+                wobbleAmp: Math.random() * 1.5 + 0.5,
+                wobbleSpeed: Math.random() * 0.04 + 0.015,
+                wobbleOffset: Math.random() * Math.PI * 2,
+                life: 0,
+                maxLife: 400 + Math.random() * 350,
+            };
+        }
+
+        function spawnEmojiIfNeeded() {
+            const emojiCount = particles.filter(p => p.type === 'emoji').length;
+            if (emojiCount < EMOJI_MAX && Math.random() < 0.012) {
+                // Spawn from bottom or sides
+                const side = Math.random();
+                let sx, sy;
+                if (side < 0.5) {
+                    sx = Math.random() * width;
+                    sy = height + 20;
+                } else if (side < 0.75) {
+                    sx = -20;
+                    sy = Math.random() * height * 0.7;
+                } else {
+                    sx = width + 20;
+                    sy = Math.random() * height * 0.7;
+                }
+                particles.push(createEmoji(sx, sy));
+            }
+        }
+
+        // Occasional firework burst
+        function spawnFireworkBurst() {
+            if (Math.random() < 0.006) {
+                const cx = Math.random() * width * 0.7 + width * 0.15;
+                const cy = Math.random() * height * 0.5 + height * 0.1;
+                const burstCount = 8 + Math.floor(Math.random() * 10);
+                for (let i = 0; i < burstCount; i++) {
+                    const angle = (Math.PI * 2 / burstCount) * i + Math.random() * 0.3;
+                    const dist = 20 + Math.random() * 50;
+                    particles.push({
+                        type: 'spark',
+                        x: cx,
+                        y: cy,
+                        targetX: cx + Math.cos(angle) * dist,
+                        targetY: cy + Math.sin(angle) * dist,
+                        progress: 0,
+                        speed: 0.015 + Math.random() * 0.03,
+                        radius: 1 + Math.random() * 1.8,
+                        color: Math.random() < 0.6 ?
+                        '#FEBE10' : '#F0E68C',
+                        opacity: 1,
+                    });
+                }
+            }
+        }
+
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+
+                if (p.type === 'star') {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    // Wrap around
+                    if (p.x < -10) p.x = width + 10;
+                    if (p.x > width + 10) p.x = -10;
+                    if (p.y < -10) p.y = height + 10;
+                    if (p.y > height + 10) p.y = -10;
+                    // Twinkle
+                    p.radius = p.baseRadius || p.radius;
+                    if (!p.baseRadius) p.baseRadius = p.radius;
+                    p.radius = p.baseRadius + Math.sin(Date.now() * p.twinkleSpeed + p.twinkleOffset) *
+                        0.6;
+                    p.radius = Math.max(0.4, p.radius);
+                }
+
+                if (p.type === 'emoji') {
+                    p.life++;
+                    p.x += p.speedX + Math.sin(Date.now() * p.wobbleSpeed + p.wobbleOffset) * p.wobbleAmp *
+                        0.15;
+                    p.y += p.speedY;
+                    p.opacity = Math.max(0, 0.85 - (p.life / p.maxLife) * 0.7);
+                    if (p.life > p.maxLife || p.y < -50 || p.x < -60 || p.x > width + 60) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                }
+
+                if (p.type === 'spark') {
+                    p.progress += p.speed;
+                    p.x += (p.targetX - p.x) * 0.08;
+                    p.y += (p.targetY - p.y) * 0.08;
+                    p.opacity = 1 - p.progress;
+                    if (p.progress >= 1) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                }
+            }
+
+            spawnEmojiIfNeeded();
+            spawnFireworkBurst();
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            for (const p of particles) {
+                ctx.save();
+                if (p.type === 'star') {
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = p.radius * 2.5;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                if (p.type === 'emoji') {
+                    ctx.globalAlpha = p.opacity;
+                    ctx.font = `${p.size}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(p.emoji, p.x, p.y);
+                }
+                if (p.type === 'spark') {
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = 6;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function animateParticles() {
+            updateParticles();
+            drawParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        seedParticles();
+        animateParticles();
+
+        // ──────────────────────────────────────
+        // 2. RICK SANCHEZ POPUP
+        // ──────────────────────────────────────
+        const rickTrigger = document.getElementById('rickTrigger');
+        const rickPopup = document.getElementById('rickPopup');
+        let popupTimeout = null;
+        let popupRemoveTimeout = null;
+
+        function showRickPopup() {
+            // Clear any existing timeouts
+            if (popupTimeout) clearTimeout(popupTimeout);
+            if (popupRemoveTimeout) clearTimeout(popupRemoveTimeout);
+
+            // Reset and trigger
+            rickPopup.classList.remove('active', 'pop');
+            void rickPopup.offsetWidth; // force reflow
+            rickPopup.classList.add('active', 'pop');
+
+            // Remove after delay
+            popupRemoveTimeout = setTimeout(() => {
+                rickPopup.classList.remove('active', 'pop');
+            }, 1500);
+        }
+
+        rickTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRickPopup();
+        });
+
+        // Touch support
+        rickTrigger.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            showRickPopup();
+        });
+
+        // Keyboard support
+        rickTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showRickPopup();
+            }
+        });
+
+        // ──────────────────────────────────────
+        // 3. MUSIC PLAYER
+        // ──────────────────────────────────────
+        const audioElements = [
+            document.getElementById('audio0'),
+            document.getElementById('audio1'),
+            document.getElementById('audio2'),
+        ];
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const songButtons = document.querySelectorAll('#songButtons button');
+        const nowPlayingLabel = document.getElementById('nowPlayingLabel');
+        let currentSongIndex = 0;
+        let isPlaying = false;
+
+        function updatePlayPauseUI() {
+            if (isPlaying) {
+                playPauseBtn.textContent = '⏸';
+                playPauseBtn.classList.add('playing');
+                playPauseBtn.setAttribute('aria-label', 'Pause music');
+            } else {
+                playPauseBtn.textContent = '▶';
+                playPauseBtn.classList.remove('playing');
+                playPauseBtn.setAttribute('aria-label', 'Play music');
+            }
+        }
+
+        function highlightSongButton(index) {
+            songButtons.forEach(btn => {
+                btn.classList.remove('active-song');
+                if (parseInt(btn.getAttribute('data-song')) === index) {
+                    btn.classList.add('active-song');
+                }
+            });
+        }
+
+        function updateNowPlayingLabel(index, playing) {
+            const songNames = ['Song 1', 'Song 2', 'Song 3']; // ★ Customize song names here
+            if (playing) {
+                nowPlayingLabel.textContent = `♫ Now playing: ${songNames[index]}`;
+            } else {
+                nowPlayingLabel.textContent = `Ready — choose a song & press play`;
+            }
+        }
+
+        function stopAllAudio() {
+            audioElements.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            isPlaying = false;
+            updatePlayPauseUI();
+            updateNowPlayingLabel(currentSongIndex, false);
+        }
+
+        function playSong(index) {
+            stopAllAudio();
+            currentSongIndex = index;
+            highlightSongButton(index);
+
+            const audio = audioElements[index];
+            if (!audio) return;
+
+            // Handle missing file gracefully
+            audio.load();
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    updatePlayPauseUI();
+                    updateNowPlayingLabel(index, true);
+                }).catch((err) => {
+                    console.warn('Audio playback failed:', err.message);
+                    isPlaying = false;
+                    updatePlayPauseUI();
+                    nowPlayingLabel.textContent =
+                        '⚠️ Audio file not found — add your .mp3 files to assets/music/';
+                    nowPlayingLabel.style.color = '#ff8866';
+                    // Reset label color after 4 seconds
+                    setTimeout(() => {
+                        nowPlayingLabel.style.color = '';
+                        updateNowPlayingLabel(currentSongIndex, false);
+                    }, 4000);
+                });
+            }
+
+            // When song ends naturally
+            audio.onended = () => {
+                isPlaying = false;
+                updatePlayPauseUI();
+                updateNowPlayingLabel(currentSongIndex, false);
+            };
+        }
+
+        function togglePlayPause() {
+            const audio = audioElements[currentSongIndex];
+            if (!audio) return;
+
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                updatePlayPauseUI();
+                updateNowPlayingLabel(currentSongIndex, false);
+            } else {
+                // If audio hasn't been loaded yet or was stopped
+                if (audio.currentTime === 0 || audio.readyState === 0) {
+                    audio.load();
+                }
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        updatePlayPauseUI();
+                        updateNowPlayingLabel(currentSongIndex, true);
+                    }).catch((err) => {
+                        console.warn('Audio playback failed:', err.message);
+                        nowPlayingLabel.textContent =
+                            '⚠️ Audio file not found — add your .mp3 files to assets/music/';
+                        nowPlayingLabel.style.color = '#ff8866';
+                        setTimeout(() => {
+                            nowPlayingLabel.style.color = '';
+                            updateNowPlayingLabel(currentSongIndex, false);
+                        }, 4000);
+                    });
+                }
+                audio.onended = () => {
+                    isPlaying = false;
+                    updatePlayPauseUI();
+                    updateNowPlayingLabel(currentSongIndex, false);
+                };
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlayPause);
+
+        songButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const songIndex = parseInt(btn.getAttribute('data-song'));
+                if (!isNaN(songIndex) && songIndex >= 0 && songIndex < 3) {
+                    playSong(songIndex);
+                }
+            });
+        });
+
+        // Initialize: highlight first song button
+        highlightSongButton(0);
+        updatePlayPauseUI();
+        updateNowPlayingLabel(0, false);
+
+        // ──────────────────────────────────────
+        // 4. RESPONSIVE TOUCH FEEDBACK
+        // ──────────────────────────────────────
+        // Add subtle haptic-like feedback class on touch
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.94)';
+            }, { passive: true });
+            btn.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+            btn.addEventListener('touchcancel', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        });
+
+        console.log('🎂 Captain Black Birthday Card — Ready!');
+        console.log('★ Replace [Friend\'s Name], age, and message in index.html');
+        console.log('★ Add friend-photo.jpg to assets/images/');
+        console.log('★ Add rick-sanchez.png to assets/images/');
+        console.log('★ Add song1.mp3, song2.mp3, song3.mp3 to assets/music/');
+        console.log('🚀 Deploy to GitHub Pages and share the link!');
+    })();
+</script>
+</body>
+</html>
