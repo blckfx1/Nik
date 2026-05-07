@@ -874,13 +874,14 @@
         // ──────────────────────────────────────
 
         const rickTrigger = document.getElementById('rickTrigger');
-        const rickPopup     = document.getElementById('rickPopup');
+        const rickPopup   = document.getElementById('rickPopup');
 
         let tapCount = 0;
+        let popupRemoveTimeout = null;   // ← Fixed: added this
 
         // ★★★★★ CHANGE YOUR PHRASES HERE ★★★★★
-        const phrase1 = "Uh-oh..";                    // Shows 9 times
-        const phrase2 = "Lick, Lick, Lick my bells!";       // Shows every 10th tap
+        const phrase1 = "Uh-oh..";                    
+        const phrase2 = "Lick, Lick, Lick my bells!"; 
 
 
         function showRickPopup() {
@@ -888,14 +889,10 @@
 
             // Decide which phrase to show
             if (tapCount % 10 === 0) {
-                rickPopup.textContent = phrase2;      // 10th, 20th, 30th... tap
+                rickPopup.textContent = phrase2;
             } else {
-                rickPopup.textContent = phrase1;      // normal taps
+                rickPopup.textContent = phrase1;
             }
-
-            // Clear any existing timeouts
-            if (popupTimeout) clearTimeout(popupTimeout);
-            if (popupRemoveTimeout) clearTimeout(popupRemoveTimeout);
 
             // Reset animation
             rickPopup.classList.remove('active', 'pop');
@@ -905,6 +902,7 @@
             rickPopup.classList.add('active', 'pop');
 
             // Auto-hide after 1.6 seconds
+            if (popupRemoveTimeout) clearTimeout(popupRemoveTimeout);
             popupRemoveTimeout = setTimeout(() => {
                 rickPopup.classList.remove('active', 'pop');
             }, 1600);
@@ -927,7 +925,6 @@
                 showRickPopup();
             }
         });
-
 
         // ──────────────────────────────────────
         // 3. MUSIC PLAYER
